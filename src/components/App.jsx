@@ -8,7 +8,7 @@ import BlogPost from "../pages/BlogPost";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     fetch("http://localhost:5000/posts")
@@ -16,15 +16,19 @@ const App = () => {
       .then(data => setBlogs(data));
   }, []);
 
+  const updateTheme = (newTheme) => {
+    setTheme(newTheme);
+  };
+
   return (
-    <>
-      <NavBar theme={theme} />
+    <div className={`app-container ${theme}`}>
+      <NavBar theme={theme} updateTheme={updateTheme} />
       <Routes>
-        <Route path="/" element={<Home blogs={blogs} />} />
+        <Route path="/" element={<Home blogs={blogs} theme={theme} />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blogs/:id" element={<BlogPost blogs={blogs} />} />
       </Routes>
-    </>
+    </div>
   );
 };
 export default App;

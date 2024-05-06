@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import BlogCard from "./BlogCard";
 
-const BlogList = ({ blogs }) => {
+const BlogList = ({ blogs, theme }) => {
   const blogList = blogs.map(blog => {
     return (
       <Link to={`/blogs/${blog.id}`} key={blog.id}>
-        <BlogCard  blog={blog} />
+        <BlogCard  blog={blog} theme={theme} />
       </Link>
     );
   });
